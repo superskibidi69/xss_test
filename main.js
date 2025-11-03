@@ -65,7 +65,7 @@ const glassCSS = `
       font-weight: 500;
     }
     a:hover { text-decoration: underline; }
-    input, button {
+    input, button, textarea {
       margin: 0.25rem 0;
       padding: 0.6rem 1rem;
       border-radius: 12px;
@@ -132,10 +132,10 @@ app.get('/guestbook', (req, res) => {
   res.send(`
     ${glassCSS}
     <div class="glass">
-      <h1>Guestbook (stored XSS demo)</h1>
+      <h1>Guestbook</h1>
       <form method="POST" action="/guestbook">
         Name: <input name="name"><br>
-        Comment: <input name="comment"><br>
+        Comment: <textarea name="comment" spellcheck="false"><br>
         <button type="submit">Post</button>
       </form>
       <h2>Entries</h2>
