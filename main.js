@@ -106,7 +106,6 @@ app.get('/', (req, res) => {
       <ul>
         <li><a href="/greet?name=guest">Reflected XSS /greet</a></li>
         <li><a href="/guestbook">Stored XSS (guestbook)</a></li>
-        <li><a href="/dom">DOM-based XSS demo</a></li>
       </ul>
     </div>
   `);
@@ -151,25 +150,5 @@ app.post('/guestbook', (req, res) => {
   res.redirect('/guestbook');
 });
 
-// DOM-based XSS
-app.get('/dom', (req, res) => {
-  res.send(`
-    ${glassCSS}
-    <div class="glass">
-      <h1>DOM XSS demo</h1>
-      <p>Try visiting with <code>#msg=%3Cscript%3Ealert('DOM XSS')%3C/script%3E</code></p>
-      <div id="output">(no message)</div>
-      <script>
-        // BAD: directly inject decoded hash into innerHTML
-        const hash = location.hash.slice(1); // remove '#'
-        if (hash.startsWith("msg=")) {
-          const msg = decodeURIComponent(hash.substring(4));
-          document.getElementById('output').innerHTML = msg;
-        }
-      </script>
-      <p><a href="/">Back</a></p>
-    </div>
-  `);
-});
 
 app.listen(3000, () => console.log('Vuln demo running on http://localhost:3000'));
