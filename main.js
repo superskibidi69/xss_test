@@ -134,8 +134,8 @@ app.get('/guestbook', (req, res) => {
     <div class="glass">
       <h1>Guestbook</h1>
       <form method="POST" action="/guestbook">
-        Name: <input name="name"><br>
-        Comment: <textarea name="comment" spellcheck="false"><br>
+        Name: <input name="name" placeholder="Enter name..."><br>
+        Comment: <textarea name="comment" placeholder="Enter comment..." spellcheck="false"></textarea><br>
         <button type="submit">Post</button>
       </form>
       <h2>Entries</h2>
